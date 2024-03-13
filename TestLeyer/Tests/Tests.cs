@@ -1,9 +1,6 @@
 ﻿using Business;
 using Core;
-using NLog;
-using OpenQA.Selenium.DevTools.V120.Page;
-using System.Configuration;
-using TestLayer.TestFixtures;
+using Core.Logger;
 
 namespace TestLayer
 {

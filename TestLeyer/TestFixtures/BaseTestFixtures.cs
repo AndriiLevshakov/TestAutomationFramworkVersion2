@@ -1,12 +1,8 @@
 ﻿using Core;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using NLog;
-using NLog.Extensions.Logging;
-using System.Configuration;
-using NUnit.Framework;
-using System.IO;
 using Business;
+using Core.Logger;
 
 namespace TestLayer
 {
@@ -17,7 +13,7 @@ namespace TestLayer
         public bool _headlessMode;
         protected HomePage _homePage;
 
-        public BaseTestFixtures() 
+        protected BaseTestFixtures() 
         {
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -28,6 +24,11 @@ namespace TestLayer
             _logger = LogManager.GetCurrentClassLogger();
             _headlessMode = _configuration.GetValue<bool>("AppSettings:WebDriverConfig:HeadlessMode");
             
+        }
+
+        static BaseTestFixtures()
+        {
+            TestFrameworkSetup.InitializeLogging("NLog.json");
         }
 
         protected string BaseUrl => _configuration["AppSettings:BaseUrl"];

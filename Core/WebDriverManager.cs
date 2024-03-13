@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-using TestLayer.TestFixtures;
 
 namespace Core
 {

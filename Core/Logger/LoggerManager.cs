@@ -1,17 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NLog;
 using NLog.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core
+namespace Core.Logger
 {
     public static class LoggerManager
     {
-        private static ILogger _logger;
+        private static ILogger? _logger;
 
         public static ILogger Logger
         {
@@ -29,13 +24,11 @@ namespace Core
                         LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
                         _logger = LogManager.GetCurrentClassLogger();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        throw;
+                        throw new Exception("File is missing");
                     }
-                    
-                    
-                    }
+                }
 
                 return _logger;
             }

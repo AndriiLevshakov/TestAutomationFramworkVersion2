@@ -32,6 +32,7 @@ namespace Business
         public bool IsDownloaded(string fileName)
         {
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
             string downloadPath = Path.Combine(userPath, "Downloads");
 
             DirectoryInfo dirInfo = new DirectoryInfo(downloadPath);
