@@ -1,11 +1,28 @@
 ﻿using Business;
-using Core;
 using Core.Logger;
+using Core.WebDriver;
+using TestLeyer;
 
 namespace TestLayer
 {
     public class Tests : BaseTestFixtures
     {
+        private readonly HomePage _homePage;
+        private readonly AboutPage _aboutPage;
+        private readonly CareersPage _careersPage;
+        private readonly InsightsPage _insightsPage;
+
+        public Tests()
+        {
+            _homePage = new HomePage(WebDriverManager.CurrentDriver);
+
+            _aboutPage = new AboutPage(WebDriverManager.CurrentDriver);
+
+            _careersPage = new CareersPage(WebDriverManager.CurrentDriver);
+
+            _insightsPage = new InsightsPage(WebDriverManager.CurrentDriver);
+        }
+
         [TestCase("C#", "All Locations")]
         public void Test1_Careers(string programmingLanguage, string location)
         {
@@ -19,36 +36,34 @@ namespace TestLayer
                 _homePage.ClickCareersLink();
                 LoggerManager.Logger.Info("Clicked Careers Link");
 
-                var careersPage = new CareersPage(WebDriverManager.Driver(HeadlessMode));
-
-                careersPage.EnterKeywords(programmingLanguage);
+                _careersPage.EnterKeywords(programmingLanguage);
                 LoggerManager.Logger.Info($"Entered keywords: {programmingLanguage}");
 
-                careersPage.OpenLocationDropDownMenu();
+                _careersPage.OpenLocationDropDownMenu();
                 LoggerManager.Logger.Info("Opened location drop down menu");
 
-                careersPage.SelectAllLocations();
+                _careersPage.SelectAllLocations();
                 LoggerManager.Logger.Info("Selected all locations");
 
-                careersPage.SelectRemoteOption();
+                _careersPage.SelectRemoteOption();
                 LoggerManager.Logger.Info("Selected remote option");
 
-                careersPage.ClickFindButton();
+                _careersPage.ClickFindButton();
                 LoggerManager.Logger.Info("Clicked 'Find' button");
 
-                careersPage.ClickSortingLabelByDate();
+                _careersPage.ClickSortingLabelByDate();
                 LoggerManager.Logger.Info("Clicked sorting label by date");
 
-                careersPage.GetLatestResul();
+                _careersPage.GetLatestResul();
                 LoggerManager.Logger.Info("Got latest result");
 
-                Assert.That(careersPage.IsPresentOnThePage(programmingLanguage),
+                Assert.That(_careersPage.IsPresentOnThePage(programmingLanguage),
                     $"Programming language '{programmingLanguage}' not found on the page");
                 LoggerManager.Logger.Info("Test successfully completed.");
             }
             catch (Exception ex)
             {
-                ScreenShot.CaptureScreenshot(WebDriverManager.Driver(HeadlessMode), nameof(Test1_Careers));
+                ScreenShot.CaptureScreenshot(WebDriverManager.CurrentDriver, nameof(Test1_Careers));
 
                 LoggerManager.Logger.Error($"An error occurred in Test1_Careers: {ex.Message}");
                 throw;
@@ -90,18 +105,16 @@ namespace TestLayer
             {
                 LoggerManager.Logger.Info("Starting the Test3_ValidatiFileDownload");
 
-                var aboutPage = new AboutPage(WebDriverManager.Driver(HeadlessMode));
-
                 _homePage.ClickAcceptButton();
                 LoggerManager.Logger.Info("Clicked 'Accept' button");
 
                 _homePage.ClickAboutLink();
                 LoggerManager.Logger.Info("Clicked 'About' link");
 
-                aboutPage.ClickDownloadButton();
+                _aboutPage.ClickDownloadButton();
                 LoggerManager.Logger.Info("Clicked 'Download' button");
 
-                Assert.That(aboutPage.IsDownloaded("EPAM_Corporate_Overview_Q4_EOY.pdf"));
+                Assert.That(_aboutPage.IsDownloaded("EPAM_Corporate_Overview_Q4_EOY.pdf"));
                 LoggerManager.Logger.Info("Test successfully completed.");
             }
             catch (Exception ex)
@@ -118,21 +131,19 @@ namespace TestLayer
             {
                 LoggerManager.Logger.Info("Starting the Test4_ValidateArticleTitleInCarousel");
 
-                var insightsPage = new InsightsPage(WebDriverManager.Driver(HeadlessMode));
-
                 _homePage.ClickAcceptButton();
                 LoggerManager.Logger.Info("Clicked 'Accept' button");
 
                 _homePage.ClickInsightsLink();
                 LoggerManager.Logger.Info("Clicked 'Insights' link");
 
-                insightsPage.SwipeCarouselTwice();
+                _insightsPage.SwipeCarouselTwice();
                 LoggerManager.Logger.Info("Swiped carousel twice");
 
-                insightsPage.ClickReadMoreButton();
+                _insightsPage.ClickReadMoreButton();
                 LoggerManager.Logger.Info("Clicked 'Read More' button");
 
-                Assert.That(insightsPage.IsActiveSliderTextPresentInTheArticleText());
+                Assert.That(_insightsPage.IsActiveSliderTextPresentInTheArticleText());
                 LoggerManager.Logger.Info("Test successfully completed.");
             }
             catch (Exception ex)
