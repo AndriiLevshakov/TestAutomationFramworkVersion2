@@ -17,13 +17,13 @@ namespace Core.WebDriver
 
         public static IWebDriver GetDriver()
         {
-            if (_driver == null)
-            {              
+                if (_driver == null)
+                {
 
-                _driver = WebDriverFactory.CreateDriver(_appConfiguration.BrowserType, _appConfiguration.HeadlessMode);
-            }
+                    _driver = WebDriverFactory.CreateDriver(_appConfiguration.BrowserType, _appConfiguration.HeadlessMode);
+                }
 
-            return _driver;
+                return _driver;
         }
 
         public AppConfiguration GetConfiguration()
@@ -34,9 +34,7 @@ namespace Core.WebDriver
                 .Build();
 
             var appConfiguration = new AppConfiguration();
-            configuration.Bind("BrowserType", appConfiguration.BrowserType);
-            configuration.Bind("HeadlessMode", appConfiguration.HeadlessMode);
-            configuration.Bind("BaseUrl", appConfiguration.BaseUrl);
+            configuration.Bind(appConfiguration);
 
             return appConfiguration;
         }
@@ -54,14 +52,14 @@ namespace Core.WebDriver
             }
         }
 
-        public static void QuitDriver()
-        {
-            if (_driver != null)
-            {
-                _driver.Quit();
+        //public static void QuitDriver()
+        //{
+        //    if (_driver != null)
+        //    {
+        //        _driver.Quit();
 
-                _driver = null;
-            }
-        }
+        //        _driver = null;
+        //    }
+        //}
     }
 }

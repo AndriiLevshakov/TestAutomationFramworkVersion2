@@ -16,12 +16,8 @@ namespace Core.Logger
                 {
                     try
                     {
-                        var config = new ConfigurationBuilder()
-                            .SetBasePath(Directory.GetCurrentDirectory())
-                            .AddJsonFile("NLog.json", optional: true, reloadOnChange: true)
-                            .Build();
-
-                        LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
+                        string configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "NLog.json");
+                        TestFrameworkSetup.InitializeLogging(configFilePath);
                         _logger = LogManager.GetCurrentClassLogger();
                     }
                     catch (Exception)

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -27,31 +28,43 @@ namespace Business
         public void EnterKeywords(string keywords)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_keywordsField)).SendKeys(keywords);
+
+            LoggerManager.Logger.Info($"Entered keywords: {keywords}");
         }
 
         public void OpenLocationDropDownMenu()
         {
             driver.FindElement(_locationField).Click();
+
+            LoggerManager.Logger.Info("Opened location drop down menu");
         }
 
         public void SelectAllLocations()
         {
             driver.FindElement(_allLocationSelector).Click();
+
+            LoggerManager.Logger.Info("Selected all locations");
         }
 
         public void SelectRemoteOption()
         {
             driver.FindElement(_remoteOption).Click();
+
+            LoggerManager.Logger.Info("Selected remote option");
         }
 
         public void ClickFindButton()
         {
             driver.FindElement(_findButtonForTest1).Click();
+
+            LoggerManager.Logger.Info("Clicked 'Find' button");
         }
 
         public void ClickSortingLabelByDate()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_sortingLabelDate)).Click();
+
+            LoggerManager.Logger.Info("Clicked sorting label by date");
         }
 
         public void GetLatestResul()
@@ -64,6 +77,8 @@ namespace Business
             }
 
             wait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+
+            LoggerManager.Logger.Info("Got latest result");
         }
 
         public bool IsPresentOnThePage(string programmingLanguage)

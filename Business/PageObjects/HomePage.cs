@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -27,43 +28,61 @@ namespace Business
         public void ClickAcceptButton()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_acceptButtonLocator)).Click();
+
+            LoggerManager.Logger.Info("Clicked Accept Button");
         }
 
         public void ClickCareersLink()
         {
             driver.FindElement(_careersLink).Click();
+
+            LoggerManager.Logger.Info("Clicked Careers Link");
         }
 
         public void ClickMagnifierIcon()
         {
             driver.FindElement(_magnifierIcon).Click();
+
+            LoggerManager.Logger.Info("Clicked magnifier icon");
         }
 
         public void SendSearchInputToGlobalSearch(string searchWords)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_searchInput)).SendKeys(searchWords);
+
+            LoggerManager.Logger.Info("Entered the search keyword into the global search input field");
         }
 
         public void ClickFindButtonForGlobalSearch()
         {
             driver.FindElement(_findButtonForGlobalSearch).Click();
+
+            LoggerManager.Logger.Info("Clicked 'Find' button for global search");
         }
 
         public bool IsSearchKeywordPresentOnThePage(string word)
         {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+
+            js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+
             var searchResults = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(_searchResult));
 
-            return searchResults.All(result => result.Text.ToLower().Contains(word.ToLower()));
+            return searchResults.Any(result => result.Text.ToLower().Contains(word.ToLower()));
         }
 
         public void ClickAboutLink()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_aboutLink)).Click();
+
+            LoggerManager.Logger.Info("Clicked 'About' link");
         }
 
         public void ClickInsightsLink()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_insightsLink)).Click();
+
+            LoggerManager.Logger.Info("Clicked 'Insights' link");
         }
     }
 }

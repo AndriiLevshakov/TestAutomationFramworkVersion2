@@ -11,14 +11,24 @@ namespace Core.Logger
         {
             NLogConfiguration config = NLogConfigLoader.LoadConfig(configFilePath);
 
-            IConfigurationSection nlogSection = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string> {
+            IConfigurationRoot nlogConfig = new ConfigurationBuilder()                
+                .AddJsonFile(configFilePath)
+                .AddInMemoryCollection(new Dictionary<string, string>
                     {
-                        "NLog", JsonSerializer.Serialize(config.NLog)
-                    } })
-                .Build().GetSection("NLog");
+                        { "NLog:InternalLogLevel", config.NLog.InternalLogLevel },
+                        { "NLog:InternalLogFile", config.NLog.InternalLogFile },
+                        { "NLog:extensions:0:Assembly", config.NLog.Extensions[0].Assembly },
+                        { "NLog:Targets:file:Type", config.NLog.Targets["file"].Type },
+                        { "NLog:Targets:file:FileName", config.NLog.Targets["file"].FileName },
+                        { "NLog:Targets:file:Layout", config.NLog.Targets["file"].Layout },
+                        { "NLog:Targets:console:Type", config.NLog.Targets["console"].Type },
+                        { "NLog:Targets:console:Layout", config.NLog.Targets["console"].Layout },
+                        { "NLog:Rules:0:Logger", config.NLog.Rules[0].Logger },
+                        { "NLog:Rules:0:MinLevel", config.NLog.Rules[0].MinLevel },
+                        { "Nlog:Rules:0:WriteTo", config.NLog.Rules[0].WriteTo }
+                    }).Build();
 
-            LogManager.Configuration = new NLogLoggingConfiguration(nlogSection);
+            LogManager.Configuration = new NLogLoggingConfiguration(nlogConfig.GetSection("NLog"));
         }
     }
 }

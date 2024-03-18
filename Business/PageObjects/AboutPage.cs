@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -27,6 +28,8 @@ namespace Business
             actions.MoveToElement(_driver.FindElement(_sectionWhichHelpToSeeDownloadButton)).Perform();
 
             _wait.Until(ExpectedConditions.ElementToBeClickable(_downloadButton)).Click();
+
+            LoggerManager.Logger.Info("Clicked 'Download' button");
         }
 
         public bool IsDownloaded(string fileName)
