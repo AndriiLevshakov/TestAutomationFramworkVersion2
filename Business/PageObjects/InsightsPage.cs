@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using static Core.Logger.LoggerManager;
 
 namespace Business
 {
@@ -39,7 +40,7 @@ namespace Business
                     .Perform();
             }
 
-            LoggerManager.Logger.Info("Swiped carousel twice");
+            Logger.Info("Swiped carousel twice");
 
             CarouselArticleTitle = driver.FindElement(_activeSlideText).Text;
         }
@@ -48,7 +49,7 @@ namespace Business
         {
             wait.Until(ExpectedConditions.ElementIsVisible(_activeSlideReadMoreButton)).Click();
 
-            LoggerManager.Logger.Info("Clicked 'Read More' button");
+            Logger.Info("Clicked 'Read More' button");
         }
 
         public bool IsActiveSliderTextPresentInTheArticleText()

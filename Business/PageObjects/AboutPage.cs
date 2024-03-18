@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using static Core.Logger.LoggerManager;
 
 namespace Business
 {
@@ -29,7 +30,7 @@ namespace Business
 
             _wait.Until(ExpectedConditions.ElementToBeClickable(_downloadButton)).Click();
 
-            LoggerManager.Logger.Info("Clicked 'Download' button");
+            Logger.Info("Clicked 'Download' button");
         }
 
         public bool IsDownloaded(string fileName)
