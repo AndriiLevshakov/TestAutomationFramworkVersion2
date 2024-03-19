@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NLog;
 using NLog.Extensions.Logging;
-using System.Text.Json;
 
 namespace Core.Logger
 {
@@ -11,7 +10,7 @@ namespace Core.Logger
         {
             NLogConfiguration config = NLogConfigLoader.LoadConfig(configFilePath);
 
-            IConfigurationRoot nlogConfig = new ConfigurationBuilder()                
+            IConfigurationRoot nlogConfig = new ConfigurationBuilder()
                 .AddJsonFile(configFilePath)
                 .AddInMemoryCollection(new Dictionary<string, string>
                     {

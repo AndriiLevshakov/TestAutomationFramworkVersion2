@@ -1,5 +1,4 @@
-﻿using Core.Logger;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using static Core.Logger.LoggerManager;

@@ -1,5 +1,4 @@
-﻿using Core.Logger;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using static Core.Logger.LoggerManager;
@@ -29,10 +28,10 @@ namespace Business
         public void ClickAcceptButton()
         {
             try
-            { 
-            wait.Until(ExpectedConditions.ElementToBeClickable(_acceptButtonLocator)).Click();
+            {
+                wait.Until(ExpectedConditions.ElementToBeClickable(_acceptButtonLocator)).Click();
 
-            Logger.Info("Clicked Accept Button");
+                Logger.Info("Clicked Accept Button");
             }
             catch (Exception ex)
             {

@@ -51,15 +51,5 @@ namespace Core.WebDriver
                 return _driver;
             }
         }
-
-        //public static void QuitDriver()
-        //{
-        //    if (_driver != null)
-        //    {
-        //        _driver.Quit();
-
-        //        _driver = null;
-        //    }
-        //}
     }
 }
