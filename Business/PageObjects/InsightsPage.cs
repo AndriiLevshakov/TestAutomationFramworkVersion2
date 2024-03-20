@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -54,6 +55,8 @@ namespace Business
         public bool IsActiveSliderTextPresentInTheArticleText()
         {
             ArticleHeader = wait.Until(ExpectedConditions.ElementIsVisible(_articleText)).Text;
+
+            Logger.Info("Test successfully finished");
 
             return ArticleHeader.Contains(CarouselArticleTitle);
         }

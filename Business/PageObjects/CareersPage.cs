@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using static Core.Logger.LoggerManager;
@@ -83,7 +84,9 @@ namespace Business
 
         public bool IsPresentOnThePage(string programmingLanguage)
         {
-            return driver.PageSource.Contains(programmingLanguage);
+            Logger.Info("Test successfully finished");
+
+            return driver.PageSource.Contains(programmingLanguage);            
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Core.Logger;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -47,6 +46,8 @@ namespace Business
             }
 
             string filePath = Path.Combine(downloadPath, fileName);
+
+            Logger.Info("Test successfully finished");
 
             return File.Exists(filePath);
         }

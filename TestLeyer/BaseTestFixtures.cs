@@ -18,6 +18,8 @@ namespace TestLeyer
         [SetUp]
         public void SetUp()
         {
+            _webDriverManager = new WebDriverManager();
+
             LoggerManager.Logger.Info($"Starting {TestContext.CurrentContext.Test.MethodName}");
 
             WebDriverManager.CurrentDriver.Navigate().GoToUrl(WebDriverManager.BaseUrl);
@@ -30,13 +32,15 @@ namespace TestLeyer
 
             ScreenShot.CaptureScreenshot(WebDriverManager.CurrentDriver, testName + ".png");
 
-            LoggerManager.Logger.Info("Test successfully finished");
+           WebDriverManager._driver.Close();
+
+            WebDriverManager._driver.Quit();
         }
 
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            WebDriverManager.CurrentDriver.Close();
-        }
+        //[OneTimeTearDown]
+        //public void OneTimeTearDown()
+        //{
+            
+        //}
     }
 }

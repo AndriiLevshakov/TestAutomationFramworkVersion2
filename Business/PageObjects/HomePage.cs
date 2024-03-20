@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.Logger;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using static Core.Logger.LoggerManager;
@@ -74,6 +75,8 @@ namespace Business
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
 
             var searchResults = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(_searchResult));
+
+            LoggerManager.Logger.Info("Test successfully finished");
 
             return searchResults.Any(result => result.Text.ToLower().Contains(word.ToLower()));
         }
