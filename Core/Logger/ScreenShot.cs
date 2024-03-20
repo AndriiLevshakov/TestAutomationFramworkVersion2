@@ -1,15 +1,7 @@
 ﻿using NLog;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TestLayer.TestFixtures
+namespace Core.Logger
 {
     public static class ScreenShot
     {

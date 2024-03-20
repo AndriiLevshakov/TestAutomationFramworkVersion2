@@ -1,35 +1,36 @@
-﻿using OpenQA.Selenium;
+﻿using Core.WebDriver.Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 
-namespace Core
+namespace Core.WebDriver
 {
     public static class WebDriverFactory
     {
-        public static IWebDriver CreateDriver(BrowserType browserType, bool headlessMode)
+        public static IWebDriver CreateDriver(BrowserTypes BrowserType, bool HeadlessMode)
         {
-            switch (browserType)
+            switch (BrowserType)
             {
-                case BrowserType.Chrome:
-                    return CreateChromeDriver(headlessMode);
-                case BrowserType.Edge:
-                    return CreateEdgeDriver(headlessMode);
+                case BrowserTypes.Chrome:
+                    return CreateChromeDriver(HeadlessMode);
+                case BrowserTypes.Edge:
+                    return CreateEdgeDriver(HeadlessMode);
                 default:
-                    throw new ArgumentException($"Unsupported browser type: {browserType}");
+                    throw new ArgumentException($"Unsupported browser type: {BrowserType}");
             }
         }
 
-        public static IWebDriver CreateEdgeDriver(bool headlessMode)
+        public static IWebDriver CreateEdgeDriver(bool HeadlessMode)
         {
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string downloadPath = Path.Combine(userPath, "Downloads");
 
             var options = new EdgeOptions();
-            
+
             options.AddArguments("--window-size=1920,1080");
             options.AddUserProfilePreference("download.default_directory", downloadPath);
 
-            if (headlessMode)
+            if (HeadlessMode)
             {
                 options.AddArguments("--headless");
             }
@@ -38,14 +39,14 @@ namespace Core
 
         }
 
-        public static IWebDriver CreateChromeDriver(bool headlessMode)
+        public static IWebDriver CreateChromeDriver(bool HeadlessMode)
         {
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string downloadPath = Path.Combine(userPath, "Downloads");
 
-            var options = new ChromeOptions();            
+            var options = new ChromeOptions();
 
-            if (headlessMode)
+            if (HeadlessMode)
             {
                 options.AddArguments("--headless");
             }

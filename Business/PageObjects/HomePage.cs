@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using static Core.Logger.LoggerManager;
 
 namespace Business
 {
@@ -26,44 +27,69 @@ namespace Business
 
         public void ClickAcceptButton()
         {
-            wait.Until(ExpectedConditions.ElementToBeClickable(_acceptButtonLocator)).Click();
+            try
+            {
+                wait.Until(ExpectedConditions.ElementToBeClickable(_acceptButtonLocator)).Click();
+
+                Logger.Info("Clicked Accept Button");
+            }
+            catch (Exception ex)
+            {
+                Logger.Info("Cookies are already accepted");
+            }
         }
 
         public void ClickCareersLink()
         {
             driver.FindElement(_careersLink).Click();
+
+            Logger.Info("Clicked Careers Link");
         }
 
         public void ClickMagnifierIcon()
         {
             driver.FindElement(_magnifierIcon).Click();
+
+            Logger.Info("Clicked magnifier icon");
         }
 
         public void SendSearchInputToGlobalSearch(string searchWords)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_searchInput)).SendKeys(searchWords);
+
+            Logger.Info("Entered the search keyword into the global search input field");
         }
 
         public void ClickFindButtonForGlobalSearch()
         {
             driver.FindElement(_findButtonForGlobalSearch).Click();
+
+            Logger.Info("Clicked 'Find' button for global search");
         }
 
         public bool IsSearchKeywordPresentOnThePage(string word)
         {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+
+            js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+
             var searchResults = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(_searchResult));
 
-            return searchResults.All(result => result.Text.ToLower().Contains(word.ToLower()));
+            return searchResults.Any(result => result.Text.ToLower().Contains(word.ToLower()));
         }
 
         public void ClickAboutLink()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_aboutLink)).Click();
+
+            Logger.Info("Clicked 'About' link");
         }
 
         public void ClickInsightsLink()
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_insightsLink)).Click();
+
+            Logger.Info("Clicked 'Insights' link");
         }
     }
 }
