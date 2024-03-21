@@ -1,13 +1,14 @@
 ﻿using Core.WebDriver.Configuration;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using static Core.WebDriver.CustomWaiter;
 
 namespace Core.WebDriver
 {
     public class WebDriverManager
-    {
-        [ThreadStatic]
-        public static IWebDriver? _driver;
+    {        
+        private static IWebDriver? _driver;
 
         private static AppConfiguration? _appConfiguration { get; set; }
         public static string BaseUrl => _appConfiguration.BaseUrl;
@@ -21,7 +22,7 @@ namespace Core.WebDriver
 
         public static IWebDriver GetDriver()
         {
-                return WebDriverFactory.CreateDriver(_appConfiguration.BrowserType, _appConfiguration.HeadlessMode); ;
+                return WebDriverFactory.CreateDriver(_appConfiguration.BrowserType, _appConfiguration.HeadlessMode);                
         }
 
         public AppConfiguration GetConfiguration()
@@ -37,6 +38,13 @@ namespace Core.WebDriver
             return appConfiguration;
         }  
         
-
+        public static void QuitDriver()
+        {
+            if ( _driver != null )
+            {
+                _driver.Quit();
+                _driver = null;
+            }
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using NLog;
-using NLog.Extensions.Logging;
+﻿using NLog;
 
 namespace Core.Logger
 {

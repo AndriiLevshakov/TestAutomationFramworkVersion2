@@ -1,12 +1,13 @@
 ﻿using Core.Logger;
 using Core.WebDriver;
-using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium.Support.UI;
+using static Core.WebDriver.CustomWaiter;
+using static Core.WebDriver.WebDriverManager;
 
 namespace TestLeyer
 {
     public abstract class BaseTestFixtures
     {
-        protected IConfiguration? _configuration;
         public bool _headlessMode;
         protected WebDriverManager _webDriverManager;
 
@@ -18,11 +19,9 @@ namespace TestLeyer
         [SetUp]
         public void SetUp()
         {
-            _webDriverManager = new WebDriverManager();
+            _wait = new WebDriverWait(CurrentDriver, TimeSpan.FromSeconds(5));
 
             LoggerManager.Logger.Info($"Starting {TestContext.CurrentContext.Test.MethodName}");
-
-            WebDriverManager.CurrentDriver.Navigate().GoToUrl(WebDriverManager.BaseUrl);
         }
 
         [TearDown]
@@ -32,15 +31,7 @@ namespace TestLeyer
 
             ScreenShot.CaptureScreenshot(WebDriverManager.CurrentDriver, testName + ".png");
 
-           WebDriverManager._driver.Close();
-
-            WebDriverManager._driver.Quit();
+            WebDriverManager.QuitDriver();
         }
-
-        //[OneTimeTearDown]
-        //public void OneTimeTearDown()
-        //{
-            
-        //}
     }
 }
