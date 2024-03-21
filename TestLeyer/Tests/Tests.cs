@@ -1,7 +1,6 @@
 ﻿using Business;
 using Business.PageObjects;
 using TestLeyer;
-using static Core.WebDriver.WebDriverManager;
 
 namespace TestLayer
 {

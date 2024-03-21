@@ -1,7 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using static Core.WebDriver.WebDriverManager;
+﻿using OpenQA.Selenium.Support.UI;
 
 namespace Core.WebDriver
 {

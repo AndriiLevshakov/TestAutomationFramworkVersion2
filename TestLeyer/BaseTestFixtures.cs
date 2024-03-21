@@ -31,7 +31,7 @@ namespace TestLeyer
 
             ScreenShot.CaptureScreenshot(WebDriverManager.CurrentDriver, testName + ".png");
 
-            WebDriverManager.QuitDriver();
+            QuitDriver();
         }
     }
 }

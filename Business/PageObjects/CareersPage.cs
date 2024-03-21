@@ -1,9 +1,8 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using static Core.Logger.LoggerManager;
-using static Core.WebDriver.WebDriverManager;
 using static Core.WebDriver.CustomWaiter;
+using static Core.WebDriver.WebDriverManager;
 
 namespace Business
 {

@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using static Core.WebDriver.WebDriverManager;
+﻿using static Core.WebDriver.WebDriverManager;
 
 namespace Business.PageObjects
 {
