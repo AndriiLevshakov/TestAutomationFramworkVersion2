@@ -1,0 +1,56 @@
+
+
+pool:
+  vmImage: 'windows-latest'
+
+trigger:
+  branches:
+    include:
+      - AzureDevOpsHomeTask
+
+steps:
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk 2.2.x'
+  inputs:
+    version: 2.2.x
+    includePreviewVersions: true
+    performMultiLevelLookup: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '$(Parameters.solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'BUILD: Solution'
+  enabled: true
+  inputs:
+    command: 'build'
+    projects: '**\*.sln'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run unit tests'
+  inputs:
+    command: 'test'
+    projects: '**\*.sln'
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: '$(Parameters.ArtifactName)'
+  condition: succeededOrFailed()
