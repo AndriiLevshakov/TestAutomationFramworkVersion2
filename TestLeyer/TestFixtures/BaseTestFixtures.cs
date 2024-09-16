@@ -19,6 +19,13 @@ namespace TestLayer
 
         public BaseTestFixtures() 
         {
+            // you should move configuration initialization to a class with a SetUpFixture attribute
+            // so that you wouldn't read the same configuration before every single test executing
+            // it can be written there into a static field and referenced here
+            // https://docs.nunit.org/articles/nunit/writing-tests/attributes/setupfixture.html
+
+            // alternatively, you can create a ConfigurationManager class
+            // that would be responsible for reading configuration once
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)

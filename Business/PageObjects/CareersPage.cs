@@ -9,6 +9,8 @@ namespace Business
         private readonly IWebDriver driver;
         private readonly WebDriverWait wait;
 
+        // please update the locators to correspond to
+        // Selenium Webdriver task requirements either on this or other pages
         private readonly By _keywordsField = By.XPath("//input[@placeholder='Keyword']");
         private readonly By _allLocationSelector = By.XPath("//li[contains(@id, 'all_locations')]");
         private readonly By _remoteOption = By.XPath("//label[contains(text(), 'Remote')]");

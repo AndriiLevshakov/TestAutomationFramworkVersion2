@@ -9,7 +9,8 @@ namespace Core
         private static IWebDriver? _driver;
 
         public static IWebDriver Driver(bool headlessMode)
-        {            
+        {      
+            // fix formatting
                 if (_driver == null)
                 {
                     var configuration = new ConfigurationBuilder()

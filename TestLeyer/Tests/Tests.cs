@@ -12,6 +12,9 @@ namespace TestLayer
         [TestCase("C#", "All Locations")]
         public void Test1_Careers(string programmingLanguage, string location)
         {
+            // the try catch block is unnecessary,
+            // use TearDown https://stackoverflow.com/questions/1131758/nunit-cleanup-after-test-failure
+
             try
             {
                 LoggerManager.Logger.Info($"Starting Test1_Careers with programming language: {programmingLanguage}, location: {location}");

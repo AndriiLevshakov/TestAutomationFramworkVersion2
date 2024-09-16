@@ -31,10 +31,11 @@ namespace Core
                     }
                     catch (Exception ex)
                     {
+                        // try adding some exception details in here or avoid the try catch block altogether
                         throw;
                     }
                     
-                    
+                    // fix formatting
                     }
 
                 return _logger;

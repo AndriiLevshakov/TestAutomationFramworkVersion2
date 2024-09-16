@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    // this class is not used anywhere and is empty
     public static class BrowserFactory
     {
 
