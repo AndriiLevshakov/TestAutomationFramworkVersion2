@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NLog;
 using NLog.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core
 {
@@ -29,14 +24,17 @@ namespace Core
                         LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
                         _logger = LogManager.GetCurrentClassLogger();
                     }
-                    catch (Exception ex)
+                    catch (FileNotFoundException ex)
                     {
-                        // try adding some exception details in here or avoid the try catch block altogether
+                        Console.WriteLine("NLog configuration file not found: " + ex.Message);
                         throw;
                     }
-                    
-                    // fix formatting
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Failed to initialize logger: " + ex.Message);
+                        throw;
                     }
+                }
 
                 return _logger;
             }
