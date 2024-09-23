@@ -10,13 +10,13 @@ namespace Business
         private readonly WebDriverWait wait;
 
         private readonly By _acceptButtonLocator = By.Id("onetrust-accept-btn-handler");
-        private readonly By _careersLink = By.XPath("//span[@class='top-navigation__item-text']/a[contains(@href, 'careers')]");
-        private readonly By _magnifierIcon = By.XPath("//span[contains(@class, 'search-icon')]");
-        private readonly By _searchInput = By.XPath("//input[@type='search']");
-        private readonly By _findButtonForGlobalSearch = By.XPath("//span[contains(text(), 'Find')]");
+        private readonly By _careersLink = By.CssSelector("li.top-navigation__item.epam:nth-of-type(5) > :first-child");
+        private readonly By _magnifierIcon = By.XPath("//button[contains(@class, 'search')]/child::*[2]");
+        private readonly By _searchInput = By.Name("q");
+        private readonly By _findButtonForGlobalSearch = By.ClassName("bth-text-layer");
         private readonly By _searchResult = By.XPath("//section[contains(@data-config-path, 'content-container')]");
-        private readonly By _aboutLink = By.XPath("//a[contains(@class, 'top-navigation__item')][contains(text(), 'About')]");
-        private readonly By _insightsLink = By.XPath("//a[contains(@class, 'top-navigation__item')][@href='/insights']");
+        private readonly By _aboutLink = By.LinkText("About");
+        private readonly By _insightsLink = By.PartialLinkText("Insights");
 
         public HomePage(IWebDriver driver)
         {

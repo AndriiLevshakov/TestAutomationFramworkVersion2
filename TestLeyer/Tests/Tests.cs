@@ -1,8 +1,5 @@
 ﻿using Business;
 using Core;
-using NLog;
-using OpenQA.Selenium.DevTools.V120.Page;
-using System.Configuration;
 using TestLayer.TestFixtures;
 
 namespace TestLayer
@@ -12,8 +9,6 @@ namespace TestLayer
         [TestCase("C#", "All Locations")]
         public void Test1_Careers(string programmingLanguage, string location)
         {
-            try
-            {
                 LoggerManager.Logger.Info($"Starting Test1_Careers with programming language: {programmingLanguage}, location: {location}");
 
                 _homePage.ClickAcceptButton();
@@ -48,14 +43,6 @@ namespace TestLayer
                 Assert.That(careersPage.IsPresentOnThePage(programmingLanguage),
                     $"Programming language '{programmingLanguage}' not found on the page");
                 LoggerManager.Logger.Info("Test successfully completed.");
-            }
-            catch (Exception ex)
-            {
-                ScreenShot.CaptureScreenshot(WebDriverManager.Driver(HeadlessMode), nameof(Test1_Careers));
-
-                LoggerManager.Logger.Error($"An error occurred in Test1_Careers: {ex.Message}");
-                throw;
-            }
         }
 
         [TestCase("BLOCKCHAIN")]
@@ -63,8 +50,6 @@ namespace TestLayer
         [TestCase("Automation")]
         public void Test2_GlobalSearch(string searchKeyword)
         {
-            try
-            {
                 LoggerManager.Logger.Info($"Starting Test2_GlobalSearch with search keyword: {searchKeyword}");
 
                 _homePage.ClickMagnifierIcon();
@@ -78,19 +63,11 @@ namespace TestLayer
 
                 Assert.That(_homePage.IsSearchKeywordPresentOnThePage(searchKeyword), $"Search keyword '{searchKeyword}' was not found on the page");
                 LoggerManager.Logger.Info("Test successfully completed.");
-            }
-            catch (Exception ex)
-            {
-                LoggerManager.Logger.Error($"An error occurred in Test2_GlobalSearch: {ex.Message}");
-                throw;
-            }
         }
 
         [Test]
         public void Test3_ValidateFileDownload()
         {
-            try
-            {
                 LoggerManager.Logger.Info("Starting the Test3_ValidatiFileDownload");
 
                 var aboutPage = new AboutPage(WebDriverManager.Driver(HeadlessMode));
@@ -106,19 +83,11 @@ namespace TestLayer
 
                 Assert.That(aboutPage.IsDownloaded("EPAM_Corporate_Overview_Q4_EOY.pdf"));
                 LoggerManager.Logger.Info("Test successfully completed.");
-            }
-            catch (Exception ex)
-            {
-                LoggerManager.Logger.Error($"An error occurred in Test3_ValidateFileDownload: {ex.Message}");
-                throw;
-            }
         }
 
         [Test]
         public void Test4_ValidateArticleTitleInCarousel()
         {
-            try
-            {
                 LoggerManager.Logger.Info("Starting the Test4_ValidateArticleTitleInCarousel");
 
                 var insightsPage = new InsightsPage(WebDriverManager.Driver(HeadlessMode));
@@ -137,12 +106,6 @@ namespace TestLayer
 
                 Assert.That(insightsPage.IsActiveSliderTextPresentInTheArticleText());
                 LoggerManager.Logger.Info("Test successfully completed.");
-            }
-            catch (Exception ex)
-            {
-                LoggerManager.Logger.Error($"An error occurred in Test4_ValidateArticleTitleInCarousel: {ex.Message}");
-                throw;
-            }
         }
     }
 }

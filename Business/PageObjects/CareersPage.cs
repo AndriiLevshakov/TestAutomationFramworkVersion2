@@ -23,7 +23,6 @@ namespace Business
 
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         }
-
         public void EnterKeywords(string keywords)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(_keywordsField)).SendKeys(keywords);

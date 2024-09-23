@@ -1,15 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-using TestLayer.TestFixtures;
 
 namespace Core
 {
     public static class WebDriverManager
     {
         private static IWebDriver? _driver;
-
         public static IWebDriver Driver(bool headlessMode)
-        {            
+        {      
                 if (_driver == null)
                 {
                     var configuration = new ConfigurationBuilder()
